@@ -1,82 +1,97 @@
-# 🔐 Login Seguro en Python
+# Login Seguro con Python
 
-Sistema de autenticación CLI desarrollado como práctica de ciberseguridad aplicada.
+Sistema de autenticación seguro desarrollado en Python con protección contra ataques de fuerza bruta, hashing de contraseñas y bloqueo temporal de cuenta.
 
----
+## Características
 
-## 🚀 Características
+- Contraseñas hasheadas con **bcrypt**
+- Variables de entorno protegidas con **python-dotenv**
+- Bloqueo automático tras 3 intentos fallidos
+- Delay progresivo entre intentos fallidos
+- Estado persistente en archivo JSON
+- Compatible con Windows, Linux y macOS
 
-- Autenticación de usuario y contraseña
-- Hashing seguro con bcrypt
-- Variables de entorno (.env)
-- Límite de intentos de login
-- Bloqueo temporal tras fallos
-- Delay progresivo contra fuerza bruta
-- Persistencia con JSON
+## Requisitos
 
----
+- Python 3.9+
+- bcrypt
+- python-dotenv
 
-## 🛡️ Seguridad implementada
+## Instalación
 
-- Hashing unidireccional con bcrypt
-- Protección contra ataques de fuerza bruta
-- Separación de credenciales del código
-- Bloqueo temporal por seguridad
-- Principio de mínima exposición
+1. Clona el repositorio:
 
----
+```bash
+git clone https://github.com/tu-usuario/login-seguro.git
+cd login-seguro
+```
 
-## 📁 Estructura del proyecto
+2. Crea y activa el entorno virtual:
 
-login-seguro/
-│
-├── login_seguro.py
-├── generar_hash.py
-├── .env
-├── .env.example
-├── lockout.json
-└── README.md
+```bash
+python -m venv .venv
 
----
+# Windows
+.\.venv\Scripts\Activate.ps1
 
-## ⚙️ Instalación
+# Linux / macOS
+source .venv/bin/activate
+```
 
+3. Instala las dependencias:
+
+```bash
 pip install bcrypt python-dotenv
+```
 
----
+## Configuración
 
-## ▶️ Ejecución
+1. Genera el hash de tu contraseña:
 
-python login_seguro.py
+```bash
+python generar_hash.py
+```
 
----
+2. Crea el archivo `.env` en la raíz del proyecto:
 
-## 🔒 ¿Cómo funciona?
+```env
+APP_USERNAME=tu_usuario
+APP_PASSWORD_HASH=$2b$12$el_hash_generado
+```
 
-La contraseña nunca se guarda directamente:
+## Uso
 
-password → bcrypt → hash irreversible
+```bash
+python login.py
+```
 
-El sistema solo valida con checkpw()
+El sistema pedirá usuario y contraseña. Tras 3 intentos fallidos la cuenta se bloquea por 5 minutos.
 
----
+## Seguridad
 
-## 📚 Conceptos aplicados
+- Las contraseñas nunca se almacenan en texto plano
+- El archivo `.env` está excluido del repositorio via `.gitignore`
+- El bloqueo temporal protege contra ataques de fuerza bruta
 
-- Ciberseguridad
-- Hashing de contraseñas
-- Variables de entorno
-- Control de acceso
-- Rate limiting
-- Persistencia de datos
+## Estructura del proyecto
 
----
+```
+login-seguro/
+├── login.py
+├── generar_hash.py
+├── .env              # No se sube a GitHub
+├── .gitignore
+└── README.md
+```
 
-## 👨‍💻 Autor
+## Autor
 
-Wilson Valverde  
-Estudiante de Ingeniería de Sistemas – 4º semestre
+Ferney Valverde
+Estudiante de Ingenieria de Sistemas en 4° semestre
 
 
 
-## 📁 Estructura del proyecto
+
+
+
+
