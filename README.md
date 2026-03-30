@@ -18,64 +18,14 @@ Implementa hashing con `bcrypt`, variables de entorno y bloqueo persistente
 ```
 login-seguro/
 │
-├── login_seguro.py      # Script principal de autenticación
-├── generar_hash.py      # Utilidad para hashear tu contraseña (correr una sola vez)
-├── .env                 # Credenciales — NO subir a Git
-├── .env.example         # Plantilla del archivo .env
-├── lockout.json         # Generado automáticamente al haber intentos fallidos
+├── login_seguro.py      
+├── generar_hash.py      
+├── .env                 
+├── .env.example         
+├── lockout.json         
 └── README.md
 ```
 
------
-
-## 🚀 Instalación y uso
-
-### 1. Clonar o descargar el proyecto
-
-```bash
-git clone https://github.com/tu-usuario/login-seguro
-cd login-seguro
-```
-
-### 2. Instalar dependencias
-
-```bash
-pip install bcrypt python-dotenv
-```
-
-### 3. Generar el hash de tu contraseña
-
-```bash
-python generar_hash.py
-```
-
-Ejemplo de salida:
-
-```
-Ingresa la contraseña que quieres hashear: ****
-
-── Copia esta línea en tu archivo .env ──
-APP_PASSWORD_HASH=$2b$12$abc123...
-```
-
-### 4. Configurar el archivo `.env`
-
-Renombra `.env.example` a `.env` y complétalo:
-
-```env
-APP_USERNAME=tu_usuario
-APP_PASSWORD_HASH=$2b$12$HASH_GENERADO_EN_EL_PASO_ANTERIOR
-```
-
-> **Importante:** Agrega `.env` y `lockout.json` a tu `.gitignore`
-
-### 5. Ejecutar el login
-
-```bash
-python login_seguro.py
-```
-
------
 
 ## 🔒 ¿Cómo funciona bcrypt?
 
