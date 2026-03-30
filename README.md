@@ -1,99 +1,82 @@
 # 🔐 Login Seguro en Python
 
-Sistema de autenticación CLI desarrollado como práctica de seguridad aplicada.  
-Implementa hashing con `bcrypt`, variables de entorno y bloqueo persistente
------
+Sistema de autenticación CLI desarrollado como práctica de ciberseguridad aplicada.
 
-## ✅ Soluciones implementadas
+---
 
-- **`bcrypt`** — hashea la contraseña de forma irreversible
-- **`python-dotenv`** — separa credenciales del código fuente
-- **`lockout.json`** — persiste el bloqueo entre ejecuciones del programa
-- **Delay progresivo** — aumenta el tiempo de espera tras cada intento fallido (2s → 4s → 6s)
+## 🚀 Características
 
------
+- Autenticación de usuario y contraseña
+- Hashing seguro con bcrypt
+- Variables de entorno (.env)
+- Límite de intentos de login
+- Bloqueo temporal tras fallos
+- Delay progresivo contra fuerza bruta
+- Persistencia con JSON
+
+---
+
+## 🛡️ Seguridad implementada
+
+- Hashing unidireccional con bcrypt
+- Protección contra ataques de fuerza bruta
+- Separación de credenciales del código
+- Bloqueo temporal por seguridad
+- Principio de mínima exposición
+
+---
 
 ## 📁 Estructura del proyecto
 
-```
 login-seguro/
 │
-├── login_seguro.py      
-├── generar_hash.py      
-├── .env                 
-├── .env.example         
-├── lockout.json         
+├── login_seguro.py
+├── generar_hash.py
+├── .env
+├── .env.example
+├── lockout.json
 └── README.md
-```
 
+---
 
-## 🔒 ¿Cómo funciona bcrypt?
+## ⚙️ Instalación
 
-```
-Contraseña original → bcrypt → $2b$12$xyz...abc  (hash)
-                                        ↓
-                         No se puede revertir al original
-                         Solo se puede verificar con checkpw()
-```
+pip install bcrypt python-dotenv
 
-Nunca se almacena la contraseña real. El sistema solo guarda el hash y verifica si lo que ingresa el usuario coincide con él.
+---
 
------
+## ▶️ Ejecución
 
-## 🛡️ Flujo de seguridad
+python login_seguro.py
 
-```
-Inicio
-  │
-  ├─ ¿lockout.json existe y bloqueado = true?
-  │     └─ Sí → Mostrar mensaje de bloqueo y salir
-  │
-  └─ No → Solicitar usuario y contraseña
-              │
-              ├─ ¿Credenciales correctas?
-              │     └─ Sí → Acceso concedido, resetear contador
-              │
-              └─ No → Incrementar contador + guardar en JSON + esperar Ns
-                           │
-                           └─ ¿Llegó a 3 intentos? → Bloquear cuenta permanentemente
-```
+---
 
------
+## 🔒 ¿Cómo funciona?
 
-## 📦 Dependencias
+La contraseña nunca se guarda directamente:
 
-|Librería       |Versión|Uso                            |
-|---------------|-------|-------------------------------|
-|`bcrypt`       |≥ 4.0  |Hashing de contraseñas         |
-|`python-dotenv`|≥ 1.0  |Lectura de variables de entorno|
+password → bcrypt → hash irreversible
 
-Librerías estándar usadas: `getpass`, `os`, `time`, `json`
+El sistema solo valida con checkpw()
 
------
-
-## .gitignore recomendado
-
-```
-.env
-lockout.json
-__pycache__/
-*.pyc
-```
-
------
+---
 
 ## 📚 Conceptos aplicados
 
-- **Hashing unidireccional** con salt automático (bcrypt)
-- **Variables de entorno** para separar configuración del código
-- **Persistencia de estado** con archivos JSON
-- **Rate limiting** mediante delays progresivos
-- **Principio de mínima exposición** — el código nunca conoce la contraseña real
+- Ciberseguridad
+- Hashing de contraseñas
+- Variables de entorno
+- Control de acceso
+- Rate limiting
+- Persistencia de datos
 
------
+---
 
-> Proyecto de práctica — Ingeniería de Sistemas · 4to Semestre  
-> Tema: Seguridad en autenticación CLI con Python
+## 👨‍💻 Autor
 
-## Autor
-Estudiante de Ingeniería de Sistemas - Semestre 4
+Wilson Valverde  
+Estudiante de Ingeniería de Sistemas – 4º semestre
+
+
+
+## 📁 Estructura del proyecto
