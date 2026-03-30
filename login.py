@@ -10,7 +10,7 @@ load_dotenv()
 MAX_INTENTOS = 3
 LOCKOUT_FILE = "lockout.json"
 DELAY_BASE = 2
-LOCKOUT_TIME = 300  # 5 minutos
+LOCKOUT_TIME = 300   
 
 USUARIO_CORRECTO = os.environ.get("APP_USERNAME")
 HASH_ENV = os.environ.get("APP_PASSWORD_HASH")
@@ -55,7 +55,7 @@ def login():
     estado = cargar_estado()
 
     if esta_bloqueado(estado):
-        print("[!] Cuenta bloqueada temporalmente. Intenta más tarde.")
+        print(" Cuenta bloqueada temporalmente. Intenta más tarde.")
         return
 
     while estado["intentos_fallidos"] < MAX_INTENTOS:
@@ -65,14 +65,14 @@ def login():
         if usuario == USUARIO_CORRECTO and verificar_password(password, HASH_CORRECTO):
             estado["intentos_fallidos"] = 0
             guardar_estado(estado)
-            print(f"\n[✓] Bienvenido, {usuario}")
+            print(f"\n Bienvenido, {usuario}")
             return
 
         estado["intentos_fallidos"] += 1
         restantes = MAX_INTENTOS - estado["intentos_fallidos"]
         delay = DELAY_BASE * estado["intentos_fallidos"]
 
-        print(f"[✗] Credenciales incorrectas. Intentos restantes: {restantes}")
+        print(f"Credenciales incorrectas. Intentos restantes: {restantes}")
         print(f"    Esperando {delay}s...")
         guardar_estado(estado)
         time.sleep(delay)
@@ -80,9 +80,8 @@ def login():
     estado["bloqueado"] = True
     estado["timestamp"] = time.time()
     guardar_estado(estado)
-    print("\n[✗] Cuenta bloqueada temporalmente por múltiples intentos fallidos.")
+    print("\n Cuenta bloqueada temporalmente por múltiples intentos fallidos.")
 
 
 if __name__ == "__main__":
     login()
-
